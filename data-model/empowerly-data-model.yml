@@ -1,0 +1,144 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/empowerly-status-api-openapi.yml ($ref graph and id-reference fields)
+summary: >-
+  A four-entity graph, derived entirely from the Statuspage contract at status.empowerly.com. This
+  is not an Empowerly domain model — Empowerly's actual student/counseling domain lives behind
+  app.empowerly.com and api.empowerly.com and is not publicly described anywhere.
+entities:
+- name: Page
+  description: The status page itself. Root of the graph; every response embeds it.
+  id_field: id
+  id_shape: '12-char lowercase alphanumeric (observed: thhkhnjsm4jy)'
+  fields:
+  - id
+  - name
+  - url
+  - time_zone
+  - updated_at
+- name: Component
+  description: A monitored platform component. Empowerly publishes exactly one, "Empowerly Web Portal".
+  id_field: id
+  id_shape: '12-char lowercase alphanumeric (observed: h2qv5hy8rsbp)'
+  fields:
+  - id
+  - name
+  - status
+  - description
+  - position
+  - showcase
+  - start_date
+  - group
+  - group_id
+  - only_show_if_degraded
+  - page_id
+  - created_at
+  - updated_at
+  enums:
+    status:
+    - operational
+    - degraded_performance
+    - partial_outage
+    - major_outage
+    - under_maintenance
+- name: Incident
+  description: >-
+    An operational incident with a lifecycle of updates. Empowerly's incident array was EMPTY at
+    probe time, so this entity is documented from the contract shape, not from observed data.
+  id_field: id
+  fields:
+  - id
+  - name
+  - status
+  - impact
+  - shortlink
+  - created_at
+  - updated_at
+  - monitoring_at
+  - resolved_at
+  - page_id
+  - incident_updates
+  - components
+  enums:
+    status:
+    - investigating
+    - identified
+    - monitoring
+    - resolved
+    - postmortem
+    impact:
+    - none
+    - minor
+    - major
+    - critical
+- name: ScheduledMaintenance
+  description: A planned maintenance window. Also empty on Empowerly's page at probe time.
+  id_field: id
+  fields:
+  - id
+  - name
+  - status
+  - scheduled_for
+  - scheduled_until
+  - page_id
+  - components
+  enums:
+    status:
+    - scheduled
+    - in_progress
+    - verifying
+    - completed
+relationships:
+- from: Component
+  to: Page
+  type: belongs_to
+  via: page_id
+  confidence: high
+- from: Component
+  to: Component
+  type: belongs_to
+  via: group_id
+  note: Self-reference for component groups. Null on Empowerly's single component.
+  confidence: high
+- from: Incident
+  to: Page
+  type: belongs_to
+  via: page_id
+  confidence: high
+- from: Incident
+  to: Component
+  type: has_many
+  via: components[]
+  note: '$ref link — an incident embeds the affected Component objects.'
+  confidence: high
+- from: ScheduledMaintenance
+  to: Page
+  type: belongs_to
+  via: page_id
+  confidence: high
+- from: ScheduledMaintenance
+  to: Component
+  type: has_many
+  via: components[]
+  confidence: high
+- from: Page
+  to: Component
+  type: has_many
+  via: components.json / summary.json response arrays
+  confidence: high
+- from: Page
+  to: Incident
+  type: has_many
+  via: incidents.json response array
+  confidence: high
+- from: Page
+  to: ScheduledMaintenance
+  type: has_many
+  via: scheduled-maintenances.json response array
+  confidence: high
+undescribed_domain:
+  note: >-
+    Empowerly's real entities — students, counselors, college lists, applications, essays, sessions,
+    internship placements — appear nowhere in any public machine-readable artifact. app.empowerly.com
+    is an unindexed SPA and api.empowerly.com serves no schema. No part of that domain model is
+    inferred here.

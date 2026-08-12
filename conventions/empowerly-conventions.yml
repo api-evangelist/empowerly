@@ -1,0 +1,90 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/empowerly-status-api-openapi.yml and live header observation on
+  https://status.empowerly.com/api/v2/* 2026-08-12
+summary: >-
+  Empowerly publishes no API design guide, no conventions document and no developer docs of any
+  kind. Everything below is derived from what the single callable surface actually does on the wire.
+  Because that surface is an Atlassian Statuspage instance, these conventions describe Atlassian's
+  contract, not an Empowerly house style — there is no Empowerly house style to record.
+authentication:
+  style: none
+  detail: Anonymous GET. No key, token, or header required. CORS is fully open (`*`).
+  see_also: authentication/empowerly-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  detail: >-
+    Not applicable and not implemented. The surface is read-only — every operation is a GET, so
+    replay is inherently safe and no idempotency key mechanism is offered. No Idempotency pointer is
+    emitted for this provider, because there is no idempotency support to point at.
+pagination:
+  style: none
+  detail: >-
+    No pagination. Collection endpoints (components, incidents, scheduled maintenances) return the
+    complete array in one response with no cursor, page, limit or offset parameter, and no link
+    headers. Empowerly's page currently reports one component and zero incidents, so payloads are
+    tiny; this convention would not survive a large incident history.
+field_expansion:
+  supported: false
+  detail: >-
+    No sparse fieldsets, no `expand`, no `fields` parameter. The variation is expressed as separate
+    endpoints instead — summary.json is the fully expanded roll-up, status.json is the minimal one.
+metadata:
+  supported: false
+  detail: No customer-writable metadata; the surface is read-only.
+request_tracing:
+  supported: true
+  headers:
+  - name: atl-traceid
+    example_shape: 32-char hex
+  - name: atl-request-id
+    example_shape: UUID
+  - name: x-amz-cf-id
+    note: CloudFront edge request id
+  detail: >-
+    Atlassian returns a trace id and a request id on every response, plus a Server-Timing header
+    (`atl-edge`, `atl-edge-upstream`, `atl-edge-pop`) exposing edge and upstream latency. These are
+    the identifiers to quote in any support conversation — though Empowerly publishes no support
+    channel for this API.
+versioning:
+  style: path
+  detail: >-
+    Version is carried in the path (`/api/v2/`). Owned and advanced by Atlassian, not Empowerly. No
+    version header, no negotiated version, no announced lifecycle.
+  see_also: lifecycle/empowerly-lifecycle.yml
+error_envelope:
+  format: none
+  rfc9457: false
+  detail: >-
+    Unknown paths under /api/v2 return an HTML error document, not JSON and not
+    application/problem+json. A JSON client that assumes JSON on the error path will fail to parse.
+  see_also: errors/empowerly-problem-types.yml
+rate_limit_signaling:
+  headers_present: false
+  detail: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After headers. The only throttling signal is
+    `Cache-Control: max-age=10, public, s-maxage=10, stale-while-revalidate=20, stale-if-error=3600`,
+    which effectively caps useful polling at once per 10 seconds.
+  see_also: rate-limits/empowerly-rate-limits.yml
+caching:
+  etag: true
+  conditional_requests: recommended
+  detail: >-
+    A weak ETag is returned on every response and `Vary: Accept, Accept-Encoding` is set. Agents
+    should send If-None-Match and handle 304 rather than re-downloading the body every poll.
+content_types:
+  request: none
+  response: application/json; charset=utf-8
+  alternatives:
+  - https://status.empowerly.com/history.rss
+  - https://status.empowerly.com/history.atom
+transport_security:
+  https_only: true
+  hsts: true
+  detail: >-
+    HSTS is set on both empowerly.com (max-age 31536000) and status.empowerly.com (max-age 259200).
+    empowerly.com publishes SPF and DMARC but DMARC policy is `p=none` and there is no DNSSEC and no
+    CAA record.
+  see_also: security/empowerly-domain-security.yml

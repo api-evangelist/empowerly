@@ -1,0 +1,95 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  negative search for an official Empowerly MCP server; candidate tools derived from
+  openapi/empowerly-status-api-openapi.yml
+status: candidate
+server:
+  exists: false
+  url: null
+note: >-
+  EMPOWERLY OPERATES NO MCP SERVER. This file records that absence plus a candidate tool shape that
+  the one callable Empowerly surface would support if anyone built one. No `MCPServer` pointer is
+  wired into apis.yml, and none should be — pointing at this file would assert a server Empowerly
+  does not run. Nothing here is callable today.
+search:
+  official_server_found: false
+  probed:
+  - url: https://empowerly.com/.well-known/ai-plugin.json
+    http_status: 403
+    note: S3 AccessDenied — no document
+  - url: https://empowerly.com/llms.txt
+    http_status: 403
+  - url: https://api.empowerly.com/
+    http_status: 404
+  - url: https://empowerly.com/developers
+    http_status: 404
+  registries_checked:
+  - npm (@modelcontextprotocol / empowerly namespace)
+  - github.com/empowerly (404 — no organization)
+candidate_tools:
+- name: get_empowerly_status_summary
+  description: Full Empowerly platform status roll-up — components, incidents, maintenances, indicator.
+  rest: getStatusSummary
+  http: GET https://status.empowerly.com/api/v2/summary.json
+  input_schema:
+    type: object
+    properties: {}
+    additionalProperties: false
+  authentication: none
+- name: get_empowerly_status
+  description: Overall Empowerly status indicator and description only.
+  rest: getStatus
+  http: GET https://status.empowerly.com/api/v2/status.json
+  input_schema:
+    type: object
+    properties: {}
+    additionalProperties: false
+  authentication: none
+- name: list_empowerly_components
+  description: List the platform components Empowerly reports on and their current status.
+  rest: listComponents
+  http: GET https://status.empowerly.com/api/v2/components.json
+  input_schema:
+    type: object
+    properties: {}
+    additionalProperties: false
+  authentication: none
+- name: list_empowerly_incidents
+  description: List Empowerly incident history, or only the unresolved ones.
+  rest:
+  - listIncidents
+  - listUnresolvedIncidents
+  http: GET https://status.empowerly.com/api/v2/incidents.json
+  input_schema:
+    type: object
+    properties:
+      unresolved_only:
+        type: boolean
+        default: false
+        description: When true, call /incidents/unresolved.json instead.
+    additionalProperties: false
+  authentication: none
+- name: list_empowerly_scheduled_maintenances
+  description: List Empowerly scheduled maintenance windows, optionally filtered to upcoming or active.
+  rest:
+  - listScheduledMaintenances
+  - listUpcomingScheduledMaintenances
+  - listActiveScheduledMaintenances
+  http: GET https://status.empowerly.com/api/v2/scheduled-maintenances.json
+  input_schema:
+    type: object
+    properties:
+      filter:
+        type: string
+        enum:
+        - all
+        - upcoming
+        - active
+        default: all
+    additionalProperties: false
+  authentication: none
+out_of_scope:
+  note: >-
+    No candidate tool is proposed for students, counselors, sessions, college lists, essays or
+    applications. Those are the actual Empowerly product and no public contract describes them.

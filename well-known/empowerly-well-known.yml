@@ -1,0 +1,111 @@
+generated: '2026-08-12'
+method: probed
+source: live probes of /.well-known/ and spec-discovery paths on every Empowerly host, 2026-08-12
+summary: >-
+  No Empowerly host serves any /.well-known/ document. empowerly.com is fronted by S3/CloudFront and
+  answers unknown paths with an S3 AccessDenied XML body under HTTP 403 — a 403 here is a MISS, not a
+  gated document. api.empowerly.com and app.empowerly.com return 404/403 on every well-known path.
+  No WellKnown, SecurityTxt, or AgentCard pointer is emitted from this probe, because nothing was
+  found. This file records a verified absence.
+hosts:
+- host: https://empowerly.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+    note: S3 AccessDenied XML, not a document
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 403
+    note: S3 AccessDenied XML, not a document
+  - path: /.well-known/agent-card.json
+    status: 403
+    note: S3 AccessDenied XML, not a document
+  - path: /.well-known/agent.json
+    status: 403
+    note: S3 AccessDenied XML, not a document
+  - path: /llms.txt
+    status: 403
+    note: S3 AccessDenied XML, not a document
+  - path: /openapi.json
+    status: 403
+    note: S3 AccessDenied XML, not a document
+  - path: /robots.txt
+    status: 200
+    note: 'Served. Contents are permissive and carry no discovery hints: "User-Agent: * / Allow: /"'
+  - path: /sitemap.xml
+    status: 200
+    note: Served — marketing, FAQ and blog URLs only; no developer or API pages
+- host: https://api.empowerly.com
+  documents:
+  - path: /
+    status: 404
+    note: nginx 404
+  - path: /health
+    status: 200
+    note: 'plain text: "Empowerly Production API is up and running" — the host is live but undocumented'
+  - path: /openapi.json
+    status: 404
+  - path: /openapi.yaml
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /v1/openapi.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /docs
+    status: 404
+  - path: /redoc
+    status: 404
+  - path: /graphql
+    status: 404
+  - path: /schema.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+- host: https://app.empowerly.com
+  documents:
+  - path: /
+    status: 200
+    note: CloudFront-served SPA — the student/counselor web portal
+  - path: /openapi.json
+    status: 404
+  - path: /graphql
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://status.empowerly.com
+  documents:
+  - path: /api/v2/summary.json
+    status: 200
+    note: Real JSON — the one machine-readable surface Empowerly serves. Captured in openapi/.
+  - path: /history.rss
+    status: 200
+  - path: /history.atom
+    status: 200
+non_resolving_hosts:
+- host: developer.empowerly.com
+  result: NXDOMAIN
+- host: docs.empowerly.com
+  result: NXDOMAIN
+agent_card:
+  found: false
+  note: >-
+    Probed /.well-known/agent-card.json and the legacy /.well-known/agent.json on empowerly.com,
+    api.empowerly.com and app.empowerly.com. No host returned a JSON AgentCard. Per pipeline rule,
+    no a2a/ artifact and no AgentCard pointer were authored.
+mcp:
+  found: false
+  note: No MCP endpoint discovered on any Empowerly host; no llms.txt to fall back to.
+graphql:
+  found: false
+  note: /graphql returns 404 on both api.empowerly.com and app.empowerly.com; no introspection attempted.

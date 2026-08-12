@@ -1,0 +1,51 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/empowerly-status-api-openapi.yml (no securitySchemes; global `security: []`), plus live
+  unauthenticated probes of status.empowerly.com, api.empowerly.com and app.empowerly.com 2026-08-12
+summary: >-
+  Empowerly documents no authentication for developers because it exposes no developer API. The one
+  callable public surface is entirely unauthenticated. A separate production API host exists behind
+  the web portal and is presumed session/token authenticated, but nothing about its scheme is
+  published and none was inferred.
+apis:
+- api: Empowerly Status API
+  baseURL: https://status.empowerly.com/api/v2
+  schemes: []
+  anonymous: true
+  note: >-
+    No securityScheme is declared and none is required. All eight probed endpoints returned 200 to
+    an anonymous GET with no credential of any kind. Access-Control-Allow-Origin is `*`, so the API
+    is callable directly from a browser. This is the Atlassian Statuspage default posture, not an
+    Empowerly design decision.
+  evidence:
+  - url: https://status.empowerly.com/api/v2/summary.json
+    http_status: 200
+    credential_sent: none
+undocumented:
+- host: https://api.empowerly.com
+  scheme: unknown
+  note: >-
+    Live production API host for the student/counselor portal. No auth scheme is published, no
+    /.well-known/oauth-authorization-server (403), no /.well-known/openid-configuration, and no
+    documented token, API key or OAuth flow anywhere on empowerly.com. Only the unauthenticated
+    /health endpoint (200) responds; every other probed path 404s. Recorded as unknown — NOT guessed.
+- host: https://app.empowerly.com
+  scheme: unknown
+  note: >-
+    Student and counselor web portal (CloudFront-served SPA). Sign-in is a human web login; no
+    programmatic auth is documented and no OIDC discovery document is served.
+oauth:
+  supported: false
+  discovery_probed:
+  - url: https://empowerly.com/.well-known/oauth-authorization-server
+    http_status: 404
+  - url: https://empowerly.com/.well-known/openid-configuration
+    http_status: 404
+  - url: https://api.empowerly.com/.well-known/oauth-authorization-server
+    http_status: 403
+scopes:
+  published: false
+  note: >-
+    derive-oauth-scopes.py found zero oauth2 securitySchemes across the repo, and no scopes or
+    permissions reference exists on empowerly.com. No scopes/ artifact was written.

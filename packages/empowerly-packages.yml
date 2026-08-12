@@ -1,0 +1,48 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  registry searches of npm, PyPI, RubyGems, crates.io, NuGet, Packagist and the GitHub org namespace
+  on 2026-08-12; plus negative probes of empowerly.com/developers and empowerly.com/api
+package_count: 0
+official_sdk_count: 0
+note: >-
+  Empowerly ships no client libraries in any language, first-party or otherwise. Every registry was
+  queried directly and every one either returned zero results or a 404 for the `empowerly` name.
+  There is also no github.com/empowerly organization (GitHub API returns 404), so there is no source
+  distribution to fall back on. No SDKs pointer is emitted, because there are no SDKs. This is a
+  verified absence, not an unchecked field.
+packages: []
+registries_checked:
+- registry: npm
+  endpoint: https://registry.npmjs.org/-/v1/search?text=empowerly
+  http_status: 200
+  results: 0
+  version: null
+- registry: PyPI
+  endpoint: https://pypi.org/pypi/empowerly/json
+  http_status: 404
+  version: null
+- registry: RubyGems
+  endpoint: https://rubygems.org/api/v1/gems/empowerly.json
+  http_status: 404
+  version: null
+- registry: NuGet
+  endpoint: https://api.nuget.org/v3/registration5-semver1/empowerly/index.json
+  http_status: 404
+  version: null
+- registry: Packagist
+  endpoint: https://packagist.org/search.json?q=empowerly
+  http_status: 200
+  results: 0
+  version: null
+  note: Only unrelated matches on the word "empower" in package descriptions.
+- registry: crates.io
+  endpoint: https://crates.io/api/v1/crates?q=empowerly
+  http_status: 403
+  version: null
+  note: crates.io rejected the automated query (403). Recorded as unchecked rather than as a zero.
+source_repositories:
+- namespace: https://github.com/empowerly
+  http_status: 404
+  note: No GitHub organization exists under this name.
+cdn_distributions: []

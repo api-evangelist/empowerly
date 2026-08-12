@@ -1,0 +1,45 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  live response-header observation on https://status.empowerly.com/api/v2/status.json 2026-08-12;
+  negative search of empowerly.com for any published limits
+limit_count: 0
+note: >-
+  Empowerly publishes no rate limits, because it publishes no API. The one callable surface — the
+  Atlassian Statuspage instance at status.empowerly.com — returned NO rate-limit headers on a live
+  unauthenticated request: no X-RateLimit-*, no RateLimit-*, no Retry-After. An agent polling this
+  endpoint gets no runtime budget signal at all and must fall back to the cache directives, which
+  are the only throttling hint served.
+limits: []
+observed_headers:
+  rate_limit_headers_present: false
+  checked:
+  - X-RateLimit-Limit
+  - X-RateLimit-Remaining
+  - X-RateLimit-Reset
+  - RateLimit-Limit
+  - RateLimit-Remaining
+  - RateLimit-Reset
+  - Retry-After
+  caching_signal:
+    header: Cache-Control
+    value: max-age=10, public, s-maxage=10, stale-while-revalidate=20, stale-if-error=3600
+    interpretation: >-
+      A 10-second cache TTL with a 20-second stale-while-revalidate window is the de facto polling
+      guidance for this endpoint — polling faster than once per 10s returns cached bytes and buys an
+      agent nothing.
+  conditional_requests:
+    etag: true
+    example_weak_etag_present: true
+    note: A weak ETag is returned; agents should send If-None-Match and expect 304s.
+  cors:
+    access-control-allow-origin: '*'
+exhaustion:
+  status_code: null
+  note: Not observed — no throttled response was induced, and none is documented.
+evidence:
+- url: https://status.empowerly.com/api/v2/status.json
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://empowerly.com/developers
+  http_status: 404

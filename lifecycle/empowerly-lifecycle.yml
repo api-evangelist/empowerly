@@ -1,0 +1,81 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://status.empowerly.com (Atlassian Statuspage instance, probed live 2026-08-12);
+  https://empowerly.com/terms-of-service; negative probes of /changelog, /release-notes,
+  /whats-new, /developers and /api on empowerly.com
+summary: >-
+  Empowerly publishes no developer program, so there is no API versioning policy, no deprecation
+  policy, no changelog, and no published SLA. What it does operate is a real Atlassian-hosted status
+  page on its own subdomain, with the standard machine-readable Statuspage JSON and RSS/Atom feeds.
+  That status page is the whole of Empowerly's public operational-transparency surface.
+versioning:
+  scheme: null
+  mechanism: null
+  docs: null
+  notes: >-
+    No public API is documented, so no versioning scheme is published. The one callable surface
+    (status.empowerly.com/api/v2) is version-pathed by Atlassian, not by Empowerly — /api/v2 is the
+    Statuspage platform version and Empowerly does not control or announce its lifecycle.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  notes: >-
+    No deprecation or sunset policy published anywhere on empowerly.com. Probed /changelog (404),
+    /release-notes (404) and /whats-new (404) — no dated change record exists for any Empowerly
+    surface.
+sla:
+  url: null
+  public_uptime_target: null
+  notes: >-
+    No numeric uptime commitment published. https://empowerly.com/terms-of-service governs the
+    consumer counseling service, not a platform availability guarantee.
+status_page:
+  url: https://status.empowerly.com/
+  platform: Atlassian Statuspage
+  page_id: thhkhnjsm4jy
+  http_status: 200
+  machine_readable:
+  - url: https://status.empowerly.com/api/v2/summary.json
+    http_status: 200
+  - url: https://status.empowerly.com/api/v2/status.json
+    http_status: 200
+  - url: https://status.empowerly.com/api/v2/components.json
+    http_status: 200
+  - url: https://status.empowerly.com/api/v2/incidents.json
+    http_status: 200
+  - url: https://status.empowerly.com/history.rss
+    http_status: 200
+  - url: https://status.empowerly.com/history.atom
+    http_status: 200
+  components:
+  - name: Empowerly Web Portal
+    id: h2qv5hy8rsbp
+    status_at_probe: operational
+    created_at: '2025-09-23'
+  observed:
+    fetched: '2026-08-12'
+    indicator: none
+    description: All Systems Operational
+    incident_count: 0
+    scheduled_maintenance_count: 0
+  notes: >-
+    The page tracks a single component — the student/counselor web portal — and had published zero
+    incidents at probe time. The component was created 2025-09-23, so the page is under a year old.
+    api.empowerly.com, the production API host behind the portal, is NOT represented as its own
+    component.
+deprecated_operations: []
+undocumented_surfaces:
+- host: https://api.empowerly.com
+  evidence:
+    url: https://api.empowerly.com/health
+    http_status: 200
+    body: Empowerly Production API is up and running
+  notes: >-
+    A live nginx-fronted production API host with a working health endpoint and a strict CSP,
+    returning 404 on every discovery path probed (/openapi.json, /swagger.json, /api-docs, /docs,
+    /redoc, /graphql, /v1, /schema.json). It is the private backend for app.empowerly.com. Recorded
+    as an observed surface, not as a published API — Empowerly documents none of it.

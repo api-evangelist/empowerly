@@ -1,23 +1,145 @@
 aid: empowerly
 name: Empowerly
-description: 'Empowerly is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Empowerly is an education-technology company founded in 2017 by Hanmei Wu and Changxiao Xie that
+  delivers personalized college admissions and career counseling to high-school students. The
+  platform pairs students with a network of more than 100 counselors — including former college
+  admission officers — and layers on data-driven tooling: a proprietary admissions calculator built
+  from thousands of past student outcomes, college-list building, essay editing and review, interview
+  preparation, and startup and research internship placement programs. Students and families work
+  through the Empowerly web portal at app.empowerly.com; counseling packages are sold through an
+  enrollment conversation rather than published price tiers. Empowerly publishes no public developer
+  program, API documentation, or SDKs; the only publicly callable surface on its own domains is the
+  Atlassian-hosted status page API at status.empowerly.com.
+image: https://empowerly.com/empowerly-icon.png
 url: https://raw.githubusercontent.com/api-evangelist/empowerly/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- education
+- edtech
+- college-admissions
+- counseling
+- students
+- career-services
+- consumer-services
+- status-page
+apis:
+- name: Empowerly Status API
+  description: >-
+    Read-only, unauthenticated JSON status API served from Empowerly's own status subdomain by
+    Atlassian Statuspage. Exposes the overall page status indicator, the component roster (currently
+    a single "Empowerly Web Portal" component), incident history, and scheduled maintenance windows,
+    plus RSS and Atom history feeds. This is a platform-provided surface rather than a first-party
+    Empowerly product API — Empowerly operates the page and its content, Atlassian defines the
+    contract.
+  humanURL: https://status.empowerly.com/
+  baseURL: https://status.empowerly.com/api/v2
+  x-hosted-by: Atlassian Statuspage
+  tags:
+  - status-page
+  - incidents
+  - uptime
+  - monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/empowerly-status-api-openapi.yml
+  - type: Overlay
+    url: overlays/empowerly-status-api-overlay.yaml
+  - type: Documentation
+    url: https://status.empowerly.com/
+  - type: RSS
+    url: https://status.empowerly.com/history.rss
+  - type: Atom
+    url: https://status.empowerly.com/history.atom
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: VulnerabilityDisclosure
+  url: security/empowerly-vulnerability-disclosure.yml
+- type: Security
+  url: security/empowerly-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/empowerly-domain-security.yml
 - type: Website
+  url: https://empowerly.com/
+- type: SecondaryMarket
   url: https://forgeglobal.com/empowerly_stock/
+- type: Blog
+  url: https://empowerly.com/blog
+- type: Pricing
+  url: https://empowerly.com/pricing
+- type: TermsOfService
+  url: https://empowerly.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://empowerly.com/privacy-policy
+- type: Login
+  url: https://app.empowerly.com/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/empowerly
+- type: StatusPage
+  url: https://status.empowerly.com/
+- type: Lifecycle
+  url: lifecycle/empowerly-lifecycle.yml
+- type: TrustCenter
+  url: security/empowerly-trust-center.yml
+- type: Compliance
+  url: security/empowerly-trust-center.yml
+- type: Authentication
+  url: authentication/empowerly-authentication.yml
+- type: Conventions
+  url: conventions/empowerly-conventions.yml
+- type: Conformance
+  url: conformance/empowerly-conformance.yml
+- type: ErrorCatalog
+  url: errors/empowerly-problem-types.yml
+- type: DataModel
+  url: data-model/empowerly-data-model.yml
+- type: Plans
+  url: plans/empowerly-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/empowerly-rate-limits.yml
+- type: Packages
+  url: packages/empowerly-packages.yml
+- type: LLMsTxt
+  url: llms/empowerly-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnownProbe
+  url: well-known/empowerly-well-known.yml
+x-enrichment:
+  date: '2026-08-12'
+  status: minimal
+  artifacts_added: 19
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Empowerly runs a live production API host (api.empowerly.com/health returns 200 "Empowerly
+    Production API is up and running") purely as the private backend for its student web portal, and
+    publishes nothing around it — no developer portal, no docs, no spec, no SDKs, no GitHub org;
+    developer.empowerly.com and docs.empowerly.com do not even resolve.
+  evidence:
+  - url: https://api.empowerly.com/health
+    status: 200
+  - url: https://api.empowerly.com/openapi.json
+    status: 404
+  - url: https://empowerly.com/developers
+    status: 404
+  - url: https://empowerly.com/api
+    status: 404
+  - url: https://empowerly.com/llms.txt
+    status: 403
+  - url: https://api.github.com/orgs/empowerly
+    status: 404
+  - url: https://status.empowerly.com/api/v2/summary.json
+    status: 200
+  checked: '2026-08-12'

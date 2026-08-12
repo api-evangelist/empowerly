@@ -1,0 +1,478 @@
+openapi: 3.1.0
+info:
+  title: Empowerly Status API
+  version: v2
+  summary: Read-only status, component, incident and maintenance data for the Empowerly platform.
+  description: >-
+    Unauthenticated JSON API served from Empowerly's own status subdomain (status.empowerly.com) by
+    Atlassian Statuspage. Empowerly does not publish an API reference for this surface; every path,
+    status code and response shape in this document was DERIVED from live unauthenticated probes of
+    https://status.empowerly.com on 2026-08-12 (see x-evidence). Nothing here is invented — schemas
+    describe the fields actually returned by those probes. Fields Statuspage may return but that were
+    not observed on this page (for example populated incident objects, since Empowerly's incident
+    history was empty at probe time) are documented as nullable/optional and marked accordingly.
+  contact:
+    name: Empowerly
+    url: https://empowerly.com/
+  x-provenance:
+    generated: '2026-08-12'
+    method: derived
+    source: >-
+      live unauthenticated probes of https://status.empowerly.com/api/v2/* on 2026-08-12; response
+      schemas modeled from the observed bodies
+    hosted_by: Atlassian Statuspage
+    first_party: false
+  x-evidence:
+    fetched: '2026-08-12'
+    probes:
+    - url: https://status.empowerly.com/api/v2/summary.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/status.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/components.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/incidents.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/incidents/unresolved.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/scheduled-maintenances.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/scheduled-maintenances/upcoming.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/scheduled-maintenances/active.json
+      http_status: 200
+      content_type: application/json; charset=utf-8
+    - url: https://status.empowerly.com/api/v2/bogus.json
+      http_status: 404
+      note: negative control — unknown paths under /api/v2 return 404
+servers:
+- url: https://status.empowerly.com/api/v2
+  description: Empowerly public status page API (Atlassian Statuspage)
+tags:
+- name: Status
+  description: Overall page status roll-up.
+- name: Components
+  description: The individual platform components Empowerly reports on.
+- name: Incidents
+  description: Incident history and currently unresolved incidents.
+- name: Maintenance
+  description: Scheduled maintenance windows.
+paths:
+  /summary.json:
+    get:
+      tags:
+      - Status
+      operationId: getStatusSummary
+      summary: Get the full status summary
+      description: >-
+        Single-call roll-up returning the page identity, every component, all unresolved incidents,
+        all upcoming/active scheduled maintenances, and the overall status indicator.
+      security: []
+      responses:
+        '200':
+          description: Status summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Summary'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /status.json:
+    get:
+      tags:
+      - Status
+      operationId: getStatus
+      summary: Get the overall status indicator
+      description: Smallest possible payload — page identity plus the overall status indicator and description.
+      security: []
+      responses:
+        '200':
+          description: Overall status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /components.json:
+    get:
+      tags:
+      - Components
+      operationId: listComponents
+      summary: List status components
+      description: >-
+        Every component reported on the Empowerly status page. As of the 2026-08-12 probe the page
+        published a single component, "Empowerly Web Portal".
+      security: []
+      responses:
+        '200':
+          description: Component list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /incidents.json:
+    get:
+      tags:
+      - Incidents
+      operationId: listIncidents
+      summary: List incidents
+      description: >-
+        Incident history for the page. Empowerly's incident array was empty at probe time, so the
+        Incident schema below documents the Statuspage incident shape as optional/nullable rather
+        than asserting fields observed on this page.
+      security: []
+      responses:
+        '200':
+          description: Incident list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /incidents/unresolved.json:
+    get:
+      tags:
+      - Incidents
+      operationId: listUnresolvedIncidents
+      summary: List unresolved incidents
+      security: []
+      responses:
+        '200':
+          description: Unresolved incident list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scheduled-maintenances.json:
+    get:
+      tags:
+      - Maintenance
+      operationId: listScheduledMaintenances
+      summary: List scheduled maintenances
+      security: []
+      responses:
+        '200':
+          description: Scheduled maintenance list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledMaintenancesResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scheduled-maintenances/upcoming.json:
+    get:
+      tags:
+      - Maintenance
+      operationId: listUpcomingScheduledMaintenances
+      summary: List upcoming scheduled maintenances
+      security: []
+      responses:
+        '200':
+          description: Upcoming scheduled maintenance list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledMaintenancesResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scheduled-maintenances/active.json:
+    get:
+      tags:
+      - Maintenance
+      operationId: listActiveScheduledMaintenances
+      summary: List active scheduled maintenances
+      security: []
+      responses:
+        '200':
+          description: Active scheduled maintenance list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledMaintenancesResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: >-
+        Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object —
+        this API does not implement RFC 9457.
+      content:
+        text/html:
+          schema:
+            type: string
+  schemas:
+    Page:
+      type: object
+      description: Identity of the status page itself. Present on every response.
+      properties:
+        id:
+          type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
+        name:
+          type: string
+          examples:
+          - Empowerly
+        url:
+          type: string
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - url
+      - updated_at
+    StatusIndicator:
+      type: object
+      properties:
+        indicator:
+          type: string
+          description: Severity roll-up across all components.
+          enum:
+          - none
+          - minor
+          - major
+          - critical
+          - maintenance
+          examples:
+          - none
+        description:
+          type: string
+          examples:
+          - All Systems Operational
+      required:
+      - indicator
+      - description
+    Component:
+      type: object
+      properties:
+        id:
+          type: string
+          examples:
+          - h2qv5hy8rsbp
+        name:
+          type: string
+          examples:
+          - Empowerly Web Portal
+        status:
+          type: string
+          enum:
+          - operational
+          - degraded_performance
+          - partial_outage
+          - major_outage
+          - under_maintenance
+          examples:
+          - operational
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        position:
+          type: integer
+        description:
+          type:
+          - string
+          - 'null'
+        showcase:
+          type: boolean
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        group_id:
+          type:
+          - string
+          - 'null'
+        page_id:
+          type: string
+        group:
+          type: boolean
+        only_show_if_degraded:
+          type: boolean
+      required:
+      - id
+      - name
+      - status
+      - page_id
+    Incident:
+      type: object
+      description: >-
+        Statuspage incident object. Empowerly published zero incidents at probe time, so no field
+        here was directly observed on this page; the shape is documented as optional.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - investigating
+          - identified
+          - monitoring
+          - resolved
+          - postmortem
+        impact:
+          type: string
+          enum:
+          - none
+          - minor
+          - major
+          - critical
+        shortlink:
+          type: string
+          format: uri
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        monitoring_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        resolved_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        page_id:
+          type: string
+        incident_updates:
+          type: array
+          items:
+            type: object
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+    ScheduledMaintenance:
+      type: object
+      description: >-
+        Statuspage scheduled maintenance object. Empowerly published zero maintenance windows at
+        probe time; shape documented as optional.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - scheduled
+          - in_progress
+          - verifying
+          - completed
+        scheduled_for:
+          type: string
+          format: date-time
+        scheduled_until:
+          type: string
+          format: date-time
+        page_id:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+    StatusResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        status:
+          $ref: '#/components/schemas/StatusIndicator'
+      required:
+      - page
+      - status
+    ComponentsResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+      required:
+      - page
+      - components
+    IncidentsResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+      required:
+      - page
+      - incidents
+    ScheduledMaintenancesResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        scheduled_maintenances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledMaintenance'
+      required:
+      - page
+      - scheduled_maintenances
+    Summary:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+        scheduled_maintenances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledMaintenance'
+        status:
+          $ref: '#/components/schemas/StatusIndicator'
+      required:
+      - page
+      - components
+      - incidents
+      - scheduled_maintenances
+      - status
+security: []

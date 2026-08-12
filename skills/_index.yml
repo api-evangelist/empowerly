@@ -1,0 +1,30 @@
+generated: '2026-08-12'
+method: generated
+source: openapi/empowerly-status-api-openapi.yml
+note: >-
+  Empowerly publishes no skills, no AGENTS.md and no agent-facing documentation — searched and not
+  found. One skill is generated here, grounded in the only real operationIds available in this repo.
+  No further skills were written because there is no other API surface to ground them in: the
+  counseling product itself is not programmatically reachable.
+skills:
+- name: empowerly-check-platform-status
+  file: empowerly-check-platform-status.md
+  api: Empowerly Status API
+  description: >-
+    Determine whether the Empowerly platform is up, which components are degraded, and whether an
+    incident or maintenance window is open — unauthenticated, in one call.
+  operations:
+  - getStatusSummary
+  - getStatus
+  - listComponents
+  - listUnresolvedIncidents
+  - listActiveScheduledMaintenances
+  authentication: none
+  method: generated
+provider_published:
+  found: false
+  probed:
+  - url: https://empowerly.com/llms.txt
+    http_status: 403
+  - url: https://empowerly.com/developers
+    http_status: 404

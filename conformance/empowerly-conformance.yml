@@ -1,0 +1,87 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/empowerly-status-api-openapi.yml; https://empowerly.com/security;
+  live probes of Empowerly hosts 2026-08-12
+summary: >-
+  Empowerly asserts one compliance program publicly (SOC 2 Type 2) and conforms to essentially no
+  API-layer standards, because it ships no API program. Every `conforms: false` below is an observed
+  absence with evidence, not an assumption.
+standards:
+- id: soc2
+  name: SOC 2 Type 2
+  conforms: true
+  evidence: >-
+    https://empowerly.com/security — "Empowerly is SOC 2 Type 2 Compliant." Report available on
+    request via security@empowerly.com; no public attestation artifact is served.
+  scope: organizational
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme in any spec; /.well-known/oauth-authorization-server 404 on
+    empowerly.com and 403 on api.empowerly.com.
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on empowerly.com.
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: 404 responses on status.empowerly.com/api/v2 return text/html, not application/problem+json.
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: /.well-known/security.txt not served (403 S3 AccessDenied on empowerly.com).
+- id: rfc8594
+  name: Sunset HTTP Header
+  conforms: false
+  evidence: No deprecation or sunset policy published; no Sunset/Deprecation headers observed.
+- id: openapi
+  name: OpenAPI
+  conforms: false
+  evidence: >-
+    Empowerly publishes no OpenAPI. The spec in openapi/ was derived by API Evangelist from live
+    probes and is explicitly marked method:derived and first_party:false.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  not_applicable: true
+  evidence: >-
+    No event, streaming or webhook surface exists to describe. history.rss/history.atom are
+    human-oriented status feeds, not an event API.
+- id: pagination
+  name: Collection pagination
+  conforms: false
+  evidence: Collection endpoints return unbounded arrays with no cursor, page, limit or offset parameter.
+- id: idempotency
+  name: Idempotency keys
+  conforms: false
+  not_applicable: true
+  evidence: Read-only surface — all operations are GET; no write path exists to make idempotent.
+- id: hsts
+  name: HTTP Strict Transport Security
+  conforms: true
+  evidence: >-
+    Strict-Transport-Security present on empowerly.com (max-age=31536000; includeSubDomains) and
+    status.empowerly.com (max-age=259200). See security/empowerly-domain-security.yml.
+- id: dnssec
+  name: DNSSEC
+  conforms: false
+  evidence: No DNSKEY records for empowerly.com.
+- id: caa
+  name: CAA
+  conforms: false
+  evidence: No CAA records for empowerly.com.
+- id: dmarc
+  name: DMARC
+  conforms: partial
+  evidence: DMARC record present but policy is p=none — monitoring only, no enforcement.
+sector_standards_not_claimed:
+- id: ferpa
+  name: FERPA
+  conforms: unknown
+  note: >-
+    Empowerly is an education provider working with US high-school students, but names no FERPA,
+    COPPA, GDPR or CCPA posture on its public security page. Recorded as unknown, not false — the
+    absence is of a published claim, not necessarily of the practice.

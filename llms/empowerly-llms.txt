@@ -1,0 +1,82 @@
+# Empowerly
+
+<!--
+generated: 2026-08-12
+method: generated
+source: apis.yml + repo artifacts (Empowerly serves no /llms.txt — https://empowerly.com/llms.txt returns 403 S3 AccessDenied)
+-->
+
+> Empowerly is an education-technology company founded in 2017 that delivers personalized college
+> admissions and career counseling to high-school students, pairing them with a network of 100+
+> counselors and a data-driven admissions calculator. Empowerly publishes NO public developer API,
+> NO documentation, NO SDKs and NO pricing. The only publicly callable surface on its domains is the
+> Atlassian-hosted status page API.
+
+## What an agent can actually do here
+
+- Read platform status, components, incident history and scheduled maintenance for Empowerly, unauthenticated.
+- Read the company's public marketing, FAQ and blog pages.
+- Nothing else. There is no way to programmatically create a student, book a counseling session,
+  query college lists, or submit an application. Those live behind a human login at app.empowerly.com.
+
+## Callable API
+
+- [Empowerly Status API](https://status.empowerly.com/api/v2): read-only JSON status API served by Atlassian Statuspage from Empowerly's own subdomain. Anonymous, CORS-open, no rate-limit headers.
+  - `GET /summary.json` — full roll-up: page, components, incidents, scheduled maintenances, overall indicator. Preferred single call.
+  - `GET /status.json` — overall indicator and description only. Cheapest liveness check (~235 bytes).
+  - `GET /components.json` — component roster. Currently one component: "Empowerly Web Portal".
+  - `GET /incidents.json` — incident history. Empty as of 2026-08-12.
+  - `GET /incidents/unresolved.json` — currently unresolved incidents.
+  - `GET /scheduled-maintenances.json` — all maintenance windows.
+  - `GET /scheduled-maintenances/upcoming.json` — upcoming windows.
+  - `GET /scheduled-maintenances/active.json` — in-progress windows.
+- [Status history RSS](https://status.empowerly.com/history.rss)
+- [Status history Atom](https://status.empowerly.com/history.atom)
+
+## Rules for calling it
+
+- Send no credentials — none are required or accepted.
+- Poll no faster than once per 10 seconds. `Cache-Control: max-age=10, s-maxage=10` means faster polling returns cached bytes.
+- Send `If-None-Match` with the returned weak ETag and handle `304`.
+- Do NOT JSON-parse a non-2xx body. Unknown paths under `/api/v2` return an **HTML** error document, not `application/problem+json`.
+- Expect no `X-RateLimit-*`, `RateLimit-*` or `Retry-After` headers. There is no runtime budget signal.
+- Note the coverage gap: the status page tracks the web portal only. `api.empowerly.com`, the production API host behind the portal, has no component, so an API-layer outage may never appear on this page.
+
+## Repository artifacts
+
+- [OpenAPI (derived, not provider-published)](openapi/empowerly-status-api-openapi.yml)
+- [Overlay](overlays/empowerly-status-api-overlay.yaml)
+- [Authentication](authentication/empowerly-authentication.yml)
+- [Conventions](conventions/empowerly-conventions.yml)
+- [Error catalog](errors/empowerly-problem-types.yml)
+- [Data model](data-model/empowerly-data-model.yml)
+- [Lifecycle and status](lifecycle/empowerly-lifecycle.yml)
+- [Rate limits](rate-limits/empowerly-rate-limits.yml)
+- [Plans and pricing](plans/empowerly-plans-pricing.yml)
+- [Packages](packages/empowerly-packages.yml)
+- [Conformance](conformance/empowerly-conformance.yml)
+- [Trust center](security/empowerly-trust-center.yml)
+- [Vulnerability disclosure](security/empowerly-vulnerability-disclosure.yml)
+- [Domain security](security/empowerly-domain-security.yml)
+- [Well-known probe](well-known/empowerly-well-known.yml)
+- [Agent skills](skills/_index.yml)
+
+## Company
+
+- [Website](https://empowerly.com/)
+- [Web portal (human login)](https://app.empowerly.com/)
+- [Blog](https://empowerly.com/blog)
+- [Security commitments](https://empowerly.com/security) — SOC 2 Type 2; report on request via security@empowerly.com
+- [Pricing](https://empowerly.com/pricing) — no published prices; consultation-gated
+- [Terms of service](https://empowerly.com/terms-of-service)
+- [Privacy policy](https://empowerly.com/privacy-policy)
+- [Status](https://status.empowerly.com/)
+- [LinkedIn](https://www.linkedin.com/company/empowerly)
+
+## Absent on purpose — do not hallucinate these
+
+- No OpenAPI published by Empowerly (the one in this repo is derived by API Evangelist from live probes).
+- No GraphQL endpoint (`/graphql` 404s on both api. and app.).
+- No MCP server. No A2A agent card. No `/llms.txt`. No `/.well-known/*` documents at all.
+- No SDKs on npm, PyPI, RubyGems, NuGet or Packagist. No `github.com/empowerly` organization.
+- No changelog, no versioning policy, no deprecation policy, no SLA, no webhooks, no events.

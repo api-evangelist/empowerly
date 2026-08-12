@@ -1,0 +1,73 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Empowerly Status API
+  version: 1.0.0
+extends: ../openapi/empowerly-status-api-openapi.yml
+x-provenance:
+  generated: '2026-08-12'
+  method: generated
+  source: >-
+    API Evangelist enrichment pipeline — captures the annotations added on top of the derived
+    Empowerly Status API description so the base document stays a faithful record of what was probed.
+actions:
+- target: $.info
+  description: Flag the whole document as third-party derived, not provider-published.
+  update:
+    x-apievangelist-provenance: derived-by-api-evangelist
+    x-provider-published-spec: false
+    x-first-party-surface: false
+- target: $.info
+  description: Record that Empowerly operates no developer program around this surface.
+  update:
+    x-developer-program: none
+    x-support-channel: none
+    x-notes: >-
+      Empowerly publishes no API reference, no SDKs, no rate limits and no support path for this
+      endpoint. Treat it as best-effort public data with no availability commitment.
+- target: $.servers[0]
+  description: Annotate the server with the hosting platform and its cache-derived polling budget.
+  update:
+    x-hosted-by: Atlassian Statuspage
+    x-anonymous: true
+    x-cors: '*'
+    x-recommended-poll-interval-seconds: 10
+    x-poll-basis: Cache-Control max-age=10, s-maxage=10, stale-while-revalidate=20
+- target: $.paths['/summary.json'].get
+  description: Mark the single-call roll-up as the preferred entry point for agents.
+  update:
+    x-preferred-entrypoint: true
+    x-agent-note: >-
+      One call returns page, components, incidents, scheduled maintenances and the overall
+      indicator. Prefer this over calling the four narrower endpoints in sequence.
+- target: $.paths['/status.json'].get
+  description: Mark the minimal payload as the cheapest liveness check.
+  update:
+    x-cheapest-check: true
+    x-response-bytes-observed: 235
+- target: >-
+    $.paths[*].get.responses['404']
+  description: Warn that the error path is HTML, not JSON.
+  update:
+    x-not-json: true
+    x-agent-note: >-
+      Error responses are HTML documents. Do not JSON-parse a non-2xx body from this API; branch on
+      the status code and the Content-Type header instead.
+- target: $.components.schemas.Incident
+  description: Record that no incident was observable at probe time.
+  update:
+    x-observed: false
+    x-observed-note: >-
+      Empowerly's incident history was empty on 2026-08-12. Field definitions come from the
+      Statuspage contract shape, not from data returned by this page.
+- target: $.components.schemas.ScheduledMaintenance
+  description: Record that no maintenance window was observable at probe time.
+  update:
+    x-observed: false
+- target: $.components.schemas.Component
+  description: Note the single component Empowerly actually reports on.
+  update:
+    x-observed-components:
+    - Empowerly Web Portal
+    x-agent-note: >-
+      The status page tracks the web portal only. api.empowerly.com, the production API host behind
+      it, has no component of its own — an API outage may not surface here.

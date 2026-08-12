@@ -1,0 +1,32 @@
+generated: '2026-08-12'
+method: searched
+source: https://empowerly.com/pricing
+plan_count: 0
+model: consultation-gated
+currency: null
+note: >-
+  Empowerly publishes no price, no tier names, no package contents and no rate card. The /pricing
+  page (HTTP 200, publicly reachable — this is not a login wall) routes every visitor to "BOOK A
+  CONSULTATION" or to the enrollment team by phone/email, and its FAQ acknowledges flexible payment
+  plans and custom packages without stating any figure. Counseling packages are quoted per student
+  after an enrollment conversation. There is no API pricing of any kind, because there is no public
+  API product.
+plans: []
+contact:
+  cta: BOOK A CONSULTATION
+  email: enrollment@empowerly.com
+  phone: 800-491-6920
+api_pricing:
+  published: false
+  note: >-
+    No developer plans, no metered API tiers, no free tier. The one callable surface
+    (status.empowerly.com/api/v2) is free and unauthenticated because Atlassian Statuspage serves it
+    that way, not because Empowerly offers an API plan.
+evidence:
+- url: https://empowerly.com/pricing
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://empowerly.com/developers
+  http_status: 404
+- url: https://empowerly.com/api
+  http_status: 404

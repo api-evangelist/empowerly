@@ -1,0 +1,44 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/empowerly-status-api-openapi.yml 4xx responses, confirmed by a live negative probe of
+  https://status.empowerly.com/api/v2/bogus.json 2026-08-12
+format: none
+rfc9457: false
+summary: >-
+  Empowerly publishes no error reference. The one callable surface returns no structured error
+  object at all — an unknown path under /api/v2 answers with an HTML error document rather than
+  JSON. There is nothing here for a client to branch on beyond the HTTP status code itself.
+problem_types:
+- status: 404
+  title: Not Found
+  media_type: text/html
+  type: null
+  code: null
+  detail_field: null
+  meaning: The requested status-page resource does not exist under /api/v2.
+  remediation: >-
+    Check the path against the eight known endpoints in
+    openapi/empowerly-status-api-openapi.yml. Do not attempt to JSON-parse the body — it is HTML.
+  evidence:
+    url: https://status.empowerly.com/api/v2/bogus.json
+    http_status: 404
+    observed_content_type: text/html
+observed_on_other_hosts:
+- host: empowerly.com
+  status: 403
+  media_type: application/xml
+  body_shape: '<Error><Code>AccessDenied</Code><Message>Access Denied</Message>...'
+  meaning: >-
+    S3/CloudFront origin error for any path the marketing site does not have an object for. This is
+    a MISS masquerading as a permission failure — it does not indicate a gated resource. Important
+    for anyone probing this domain: 403 here means "not published", not "authenticate and retry".
+- host: api.empowerly.com
+  status: 404
+  media_type: text/html
+  body_shape: nginx default 404 page
+  meaning: Undocumented production API host; every path but /health 404s to anonymous callers.
+gaps:
+- No machine-readable error codes anywhere on any Empowerly surface.
+- No application/problem+json (RFC 9457) support.
+- No error reference documentation to search or enrich this catalog from.
