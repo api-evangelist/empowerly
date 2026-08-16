@@ -1,0 +1,18 @@
+{
+  "repo": "empowerly",
+  "feeds": [
+    {
+      "source": "https://status.empowerly.com/",
+      "feed_url": "https://status.empowerly.com/history.atom",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
+      "source": "https://forgeglobal.com/empowerly_stock/",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-15T12:22:01Z"
+}
