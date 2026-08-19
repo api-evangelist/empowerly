@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Empowerly Status API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the full status summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/summary.json"
+          },
+          "docs": "Single-call roll-up returning the page identity, every component, all unresolved incidents, all upcoming/active scheduled maintenances, and the overall status indicator."
+        },
+        {
+          "info": {
+            "name": "Get the overall status indicator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/status.json"
+          },
+          "docs": "Smallest possible payload — page identity plus the overall status indicator and description."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Components",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List status components",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/components.json"
+          },
+          "docs": "Every component reported on the Empowerly status page. As of the 2026-08-12 probe the page published a single component, \"Empowerly Web Portal\"."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/incidents.json"
+          },
+          "docs": "Incident history for the page. Empowerly's incident array was empty at probe time, so the Incident schema below documents the Statuspage incident shape as optional/nullable rather than asserting fields observed on this page."
+        },
+        {
+          "info": {
+            "name": "List unresolved incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/incidents/unresolved.json"
+          },
+          "docs": "List unresolved incidents"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Maintenance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List scheduled maintenances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/scheduled-maintenances.json"
+          },
+          "docs": "List scheduled maintenances"
+        },
+        {
+          "info": {
+            "name": "List upcoming scheduled maintenances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/scheduled-maintenances/upcoming.json"
+          },
+          "docs": "List upcoming scheduled maintenances"
+        },
+        {
+          "info": {
+            "name": "List active scheduled maintenances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://status.empowerly.com/api/v2/scheduled-maintenances/active.json"
+          },
+          "docs": "List active scheduled maintenances"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

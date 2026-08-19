@@ -1,17 +1,14 @@
 generated: '2026-08-12'
 method: derived
-source: >-
-  negative search for an official Empowerly MCP server; candidate tools derived from
-  openapi/empowerly-status-api-openapi.yml
+source: negative search for an official Empowerly MCP server; candidate tools derived from openapi/empowerly-status-api-openapi.yml
 status: candidate
 server:
   exists: false
   url: null
-note: >-
-  EMPOWERLY OPERATES NO MCP SERVER. This file records that absence plus a candidate tool shape that
-  the one callable Empowerly surface would support if anyone built one. No `MCPServer` pointer is
-  wired into apis.yml, and none should be — pointing at this file would assert a server Empowerly
-  does not run. Nothing here is callable today.
+note: EMPOWERLY OPERATES NO MCP SERVER. This file records that absence plus a candidate tool shape that
+  the one callable Empowerly surface would support if anyone built one. No `MCPServer` pointer is wired
+  into apis.yml, and none should be — pointing at this file would assert a server Empowerly does not run.
+  Nothing here is callable today.
 search:
   official_server_found: false
   probed:
@@ -90,6 +87,10 @@ candidate_tools:
     additionalProperties: false
   authentication: none
 out_of_scope:
-  note: >-
-    No candidate tool is proposed for students, counselors, sessions, college lists, essays or
-    applications. Those are the actual Empowerly product and no public contract describes them.
+  note: No candidate tool is proposed for students, counselors, sessions, college lists, essays or applications.
+    Those are the actual Empowerly product and no public contract describes them.
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census

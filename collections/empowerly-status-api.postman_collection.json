@@ -1,0 +1,902 @@
+{
+  "item": [
+    {
+      "id": "3afd0b5a-789a-4e30-9f38-ffe2fdc2228f",
+      "name": "Status",
+      "description": {
+        "content": "Overall page status roll-up.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a77c378f-cf3a-4efc-8cfb-9cc4c57a5a70",
+          "name": "Get the full status summary",
+          "request": {
+            "name": "Get the full status summary",
+            "description": {
+              "content": "Single-call roll-up returning the page identity, every component, all unresolved incidents, all upcoming/active scheduled maintenances, and the overall status indicator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "summary.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ec32a0c-dbcc-446e-a4ef-8faa915bba8c",
+              "name": "Status summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"2019-08-16T01:48:37.032Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"components\": [\n    {\n      \"id\": \"h2qv5hy8rsbp\",\n      \"name\": \"Empowerly Web Portal\",\n      \"status\": \"operational\",\n      \"page_id\": \"string\",\n      \"created_at\": \"1983-11-05T13:50:49.279Z\",\n      \"updated_at\": \"2022-03-05T12:28:44.578Z\",\n      \"position\": 5787,\n      \"description\": \"string\",\n      \"showcase\": true,\n      \"start_date\": \"1982-12-11\",\n      \"group_id\": \"string\",\n      \"group\": false,\n      \"only_show_if_degraded\": true\n    },\n    {\n      \"id\": \"h2qv5hy8rsbp\",\n      \"name\": \"Empowerly Web Portal\",\n      \"status\": \"operational\",\n      \"page_id\": \"string\",\n      \"created_at\": \"1958-09-26T00:33:17.286Z\",\n      \"updated_at\": \"2009-05-30T20:31:09.186Z\",\n      \"position\": 8745,\n      \"description\": \"string\",\n      \"showcase\": false,\n      \"start_date\": \"1999-06-02\",\n      \"group_id\": \"string\",\n      \"group\": false,\n      \"only_show_if_degraded\": true\n    }\n  ],\n  \"incidents\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"investigating\",\n      \"impact\": \"minor\",\n      \"shortlink\": \"https://vuOgFDLBivVrAR.nkwlUYx9Zz,copgoUF-ci37UGhwI,QCZekgUm-RYRS2EC,aYpji0-eV\",\n      \"created_at\": \"1983-10-11T15:45:39.752Z\",\n      \"updated_at\": \"1947-01-06T08:41:23.670Z\",\n      \"monitoring_at\": \"2013-06-04T07:45:03.379Z\",\n      \"resolved_at\": \"1976-11-26T16:17:28.815Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1974-06-01T23:21:38.987Z\",\n          \"updated_at\": \"1997-05-02T15:48:22.469Z\",\n          \"position\": 7499,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1962-12-30\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": false\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2007-03-05T11:31:08.909Z\",\n          \"updated_at\": \"1966-02-20T22:11:13.766Z\",\n          \"position\": 5969,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2011-03-24\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"monitoring\",\n      \"impact\": \"critical\",\n      \"shortlink\": \"http://tys.xbtCh9+WLvN\",\n      \"created_at\": \"2010-02-24T10:14:33.239Z\",\n      \"updated_at\": \"2008-12-01T10:51:21.292Z\",\n      \"monitoring_at\": \"2007-01-16T15:20:11.560Z\",\n      \"resolved_at\": \"1997-08-29T10:42:56.637Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1969-07-04T19:10:48.954Z\",\n          \"updated_at\": \"1948-10-06T05:57:09.898Z\",\n          \"position\": 8804,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1955-10-09\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": true\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1973-04-20T05:37:26.585Z\",\n          \"updated_at\": \"1995-11-12T03:07:26.951Z\",\n          \"position\": 8503,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2007-07-09\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": true\n        }\n      ]\n    }\n  ],\n  \"scheduled_maintenances\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"verifying\",\n      \"scheduled_for\": \"1985-01-30T18:16:40.036Z\",\n      \"scheduled_until\": \"2017-05-31T20:43:06.411Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1950-03-22T11:33:46.407Z\",\n          \"updated_at\": \"1997-05-29T12:50:29.236Z\",\n          \"position\": 8919,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2013-11-16\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": false\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2004-09-30T14:57:38.065Z\",\n          \"updated_at\": \"1980-10-20T10:56:34.414Z\",\n          \"position\": 3964,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1979-02-20\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"completed\",\n      \"scheduled_for\": \"1967-01-14T16:18:57.816Z\",\n      \"scheduled_until\": \"1998-11-11T18:44:36.587Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2006-07-22T10:15:38.042Z\",\n          \"updated_at\": \"2024-01-07T11:59:41.583Z\",\n          \"position\": 9504,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1960-10-22\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": true\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2021-04-14T10:41:16.888Z\",\n          \"updated_at\": \"2012-03-19T20:06:28.332Z\",\n          \"position\": 1002,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2024-07-27\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    }\n  ],\n  \"status\": {\n    \"indicator\": \"none\",\n    \"description\": \"All Systems Operational\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7e89757-13e5-4ba0-a9b7-79186c817a48",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f6b938e-0f9b-4e9f-9b9c-b5fded1f3e8e",
+          "name": "Get the overall status indicator",
+          "request": {
+            "name": "Get the overall status indicator",
+            "description": {
+              "content": "Smallest possible payload — page identity plus the overall status indicator and description.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5bf65a8-476e-4dd0-93c1-6babdc2ca2bb",
+              "name": "Overall status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"1961-08-25T07:56:41.879Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"status\": {\n    \"indicator\": \"none\",\n    \"description\": \"All Systems Operational\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76d3997a-e81e-4214-a186-55c15f3ca878",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9e084cc6-4c23-4dc6-a5b5-5849912c798b",
+      "name": "Components",
+      "description": {
+        "content": "The individual platform components Empowerly reports on.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f8a6d4c-027c-4f7f-969a-32ae647ae989",
+          "name": "List status components",
+          "request": {
+            "name": "List status components",
+            "description": {
+              "content": "Every component reported on the Empowerly status page. As of the 2026-08-12 probe the page published a single component, \"Empowerly Web Portal\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "components.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4830ca66-ca16-46fa-977e-7788629c6164",
+              "name": "Component list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "components.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"2003-09-11T00:31:49.967Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"components\": [\n    {\n      \"id\": \"h2qv5hy8rsbp\",\n      \"name\": \"Empowerly Web Portal\",\n      \"status\": \"operational\",\n      \"page_id\": \"string\",\n      \"created_at\": \"2021-05-11T19:40:07.286Z\",\n      \"updated_at\": \"1977-04-27T10:23:09.780Z\",\n      \"position\": 4985,\n      \"description\": \"string\",\n      \"showcase\": false,\n      \"start_date\": \"1991-03-18\",\n      \"group_id\": \"string\",\n      \"group\": false,\n      \"only_show_if_degraded\": true\n    },\n    {\n      \"id\": \"h2qv5hy8rsbp\",\n      \"name\": \"Empowerly Web Portal\",\n      \"status\": \"operational\",\n      \"page_id\": \"string\",\n      \"created_at\": \"1980-03-25T12:07:35.161Z\",\n      \"updated_at\": \"1969-05-04T05:23:08.679Z\",\n      \"position\": 3258,\n      \"description\": \"string\",\n      \"showcase\": true,\n      \"start_date\": \"1977-11-19\",\n      \"group_id\": \"string\",\n      \"group\": false,\n      \"only_show_if_degraded\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6bbc8bb-ea25-4dab-ae38-b5b837b0d49d",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "components.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2338420e-d121-4a90-8488-e1606175efa6",
+      "name": "Incidents",
+      "description": {
+        "content": "Incident history and currently unresolved incidents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d989cc9-2202-49d2-bd58-96ee0c7ea709",
+          "name": "List incidents",
+          "request": {
+            "name": "List incidents",
+            "description": {
+              "content": "Incident history for the page. Empowerly's incident array was empty at probe time, so the Incident schema below documents the Statuspage incident shape as optional/nullable rather than asserting fields observed on this page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "incidents.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aedcfe0f-78b2-4b3e-91f4-433f369ab286",
+              "name": "Incident list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incidents.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"2007-11-01T08:02:44.056Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"incidents\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"resolved\",\n      \"impact\": \"major\",\n      \"shortlink\": \"https://drAvhOLgFSTvKs.oiddRHPfr5w.zV0AGk2QfmUPLr3TU3bz2KscSLC+L0CeTHY4QittgNuUE,bGRc+Xd\",\n      \"created_at\": \"1978-03-12T01:31:56.370Z\",\n      \"updated_at\": \"1991-10-16T01:19:59.819Z\",\n      \"monitoring_at\": \"1972-10-04T04:16:20.777Z\",\n      \"resolved_at\": \"2023-10-28T00:09:06.979Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1971-03-13T15:03:52.804Z\",\n          \"updated_at\": \"2004-02-03T13:30:45.580Z\",\n          \"position\": 8096,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1988-02-27\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": true\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2015-10-21T17:57:20.520Z\",\n          \"updated_at\": \"1982-01-29T03:10:31.165Z\",\n          \"position\": 7104,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1987-11-12\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"identified\",\n      \"impact\": \"none\",\n      \"shortlink\": \"https://CXifZeMClkFgKk.abna4tJabSvr+bldQBzDgYJ1l4p4XgdpUIiMr6g\",\n      \"created_at\": \"2013-12-26T12:51:07.871Z\",\n      \"updated_at\": \"1975-07-15T09:10:25.133Z\",\n      \"monitoring_at\": \"2000-03-23T09:01:24.243Z\",\n      \"resolved_at\": \"1960-01-06T18:51:50.643Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1975-11-09T01:30:20.782Z\",\n          \"updated_at\": \"1978-06-20T05:59:55.807Z\",\n          \"position\": 2341,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2000-01-02\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1974-01-25T13:15:56.580Z\",\n          \"updated_at\": \"1986-08-05T04:19:57.788Z\",\n          \"position\": 7048,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1969-05-16\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": true\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b8f32df-48e2-4a83-8f5d-6371c2530469",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incidents.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a43f487-71ee-4727-9336-2c241999b62e",
+          "name": "List unresolved incidents",
+          "request": {
+            "name": "List unresolved incidents",
+            "description": {},
+            "url": {
+              "path": [
+                "incidents",
+                "unresolved.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "498521a4-5f1f-4264-a9ec-76e0504bdf60",
+              "name": "Unresolved incident list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incidents",
+                    "unresolved.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"2007-11-01T08:02:44.056Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"incidents\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"resolved\",\n      \"impact\": \"major\",\n      \"shortlink\": \"https://drAvhOLgFSTvKs.oiddRHPfr5w.zV0AGk2QfmUPLr3TU3bz2KscSLC+L0CeTHY4QittgNuUE,bGRc+Xd\",\n      \"created_at\": \"1978-03-12T01:31:56.370Z\",\n      \"updated_at\": \"1991-10-16T01:19:59.819Z\",\n      \"monitoring_at\": \"1972-10-04T04:16:20.777Z\",\n      \"resolved_at\": \"2023-10-28T00:09:06.979Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1971-03-13T15:03:52.804Z\",\n          \"updated_at\": \"2004-02-03T13:30:45.580Z\",\n          \"position\": 8096,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1988-02-27\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": true\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2015-10-21T17:57:20.520Z\",\n          \"updated_at\": \"1982-01-29T03:10:31.165Z\",\n          \"position\": 7104,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1987-11-12\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"identified\",\n      \"impact\": \"none\",\n      \"shortlink\": \"https://CXifZeMClkFgKk.abna4tJabSvr+bldQBzDgYJ1l4p4XgdpUIiMr6g\",\n      \"created_at\": \"2013-12-26T12:51:07.871Z\",\n      \"updated_at\": \"1975-07-15T09:10:25.133Z\",\n      \"monitoring_at\": \"2000-03-23T09:01:24.243Z\",\n      \"resolved_at\": \"1960-01-06T18:51:50.643Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1975-11-09T01:30:20.782Z\",\n          \"updated_at\": \"1978-06-20T05:59:55.807Z\",\n          \"position\": 2341,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2000-01-02\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1974-01-25T13:15:56.580Z\",\n          \"updated_at\": \"1986-08-05T04:19:57.788Z\",\n          \"position\": 7048,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1969-05-16\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": true\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acf97fdb-1c72-4475-9d78-d7c9e65c6abd",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incidents",
+                    "unresolved.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cde680f0-13e4-495c-97e1-c0b0073c57da",
+      "name": "Maintenance",
+      "description": {
+        "content": "Scheduled maintenance windows.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df929a5c-437e-4e3c-a585-2faf116d7a53",
+          "name": "List scheduled maintenances",
+          "request": {
+            "name": "List scheduled maintenances",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled-maintenances.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f248e3ef-c30a-4ba8-9462-7d834ceee499",
+              "name": "Scheduled maintenance list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-maintenances.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"1976-01-27T19:58:54.794Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"scheduled_maintenances\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"scheduled\",\n      \"scheduled_for\": \"1982-08-02T06:12:22.921Z\",\n      \"scheduled_until\": \"1975-04-16T12:54:13.941Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1983-12-14T18:49:48.668Z\",\n          \"updated_at\": \"2024-07-09T04:44:05.187Z\",\n          \"position\": 8672,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1948-06-20\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1992-07-26T08:41:45.673Z\",\n          \"updated_at\": \"2022-01-07T21:21:29.075Z\",\n          \"position\": 538,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1982-12-03\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"in_progress\",\n      \"scheduled_for\": \"2021-12-07T14:02:49.989Z\",\n      \"scheduled_until\": \"1969-03-11T00:28:57.971Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2009-03-21T02:22:50.048Z\",\n          \"updated_at\": \"1988-04-16T11:22:22.424Z\",\n          \"position\": 6630,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2019-07-17\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": true\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1998-04-15T12:07:16.357Z\",\n          \"updated_at\": \"1959-02-09T01:47:54.995Z\",\n          \"position\": 1675,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1980-09-10\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c25fbbe4-37da-46e0-b1af-3828b5b91fe3",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-maintenances.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0f07d97-6146-4c2a-89dc-8215afa09df2",
+          "name": "List upcoming scheduled maintenances",
+          "request": {
+            "name": "List upcoming scheduled maintenances",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled-maintenances",
+                "upcoming.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da903c51-e0dd-41e9-9c47-a8606017494b",
+              "name": "Upcoming scheduled maintenance list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-maintenances",
+                    "upcoming.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"1976-01-27T19:58:54.794Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"scheduled_maintenances\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"scheduled\",\n      \"scheduled_for\": \"1982-08-02T06:12:22.921Z\",\n      \"scheduled_until\": \"1975-04-16T12:54:13.941Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1983-12-14T18:49:48.668Z\",\n          \"updated_at\": \"2024-07-09T04:44:05.187Z\",\n          \"position\": 8672,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1948-06-20\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1992-07-26T08:41:45.673Z\",\n          \"updated_at\": \"2022-01-07T21:21:29.075Z\",\n          \"position\": 538,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1982-12-03\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"in_progress\",\n      \"scheduled_for\": \"2021-12-07T14:02:49.989Z\",\n      \"scheduled_until\": \"1969-03-11T00:28:57.971Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2009-03-21T02:22:50.048Z\",\n          \"updated_at\": \"1988-04-16T11:22:22.424Z\",\n          \"position\": 6630,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2019-07-17\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": true\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1998-04-15T12:07:16.357Z\",\n          \"updated_at\": \"1959-02-09T01:47:54.995Z\",\n          \"position\": 1675,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1980-09-10\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffb11ad8-dc3b-4b93-9bac-24f04db8f78c",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-maintenances",
+                    "upcoming.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f24e941-b861-4e93-b24e-f528107ce5b1",
+          "name": "List active scheduled maintenances",
+          "request": {
+            "name": "List active scheduled maintenances",
+            "description": {},
+            "url": {
+              "path": [
+                "scheduled-maintenances",
+                "active.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6af4195-32e8-4966-95ce-f765f76bd699",
+              "name": "Active scheduled maintenance list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-maintenances",
+                    "active.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"id\": \"thhkhnjsm4jy\",\n    \"name\": \"Empowerly\",\n    \"url\": \"https://status.empowerly.com\",\n    \"updated_at\": \"1976-01-27T19:58:54.794Z\",\n    \"time_zone\": \"America/Los_Angeles\"\n  },\n  \"scheduled_maintenances\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"scheduled\",\n      \"scheduled_for\": \"1982-08-02T06:12:22.921Z\",\n      \"scheduled_until\": \"1975-04-16T12:54:13.941Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1983-12-14T18:49:48.668Z\",\n          \"updated_at\": \"2024-07-09T04:44:05.187Z\",\n          \"position\": 8672,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"1948-06-20\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1992-07-26T08:41:45.673Z\",\n          \"updated_at\": \"2022-01-07T21:21:29.075Z\",\n          \"position\": 538,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1982-12-03\",\n          \"group_id\": \"string\",\n          \"group\": true,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"in_progress\",\n      \"scheduled_for\": \"2021-12-07T14:02:49.989Z\",\n      \"scheduled_until\": \"1969-03-11T00:28:57.971Z\",\n      \"page_id\": \"string\",\n      \"components\": [\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"2009-03-21T02:22:50.048Z\",\n          \"updated_at\": \"1988-04-16T11:22:22.424Z\",\n          \"position\": 6630,\n          \"description\": \"string\",\n          \"showcase\": false,\n          \"start_date\": \"2019-07-17\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": true\n        },\n        {\n          \"id\": \"h2qv5hy8rsbp\",\n          \"name\": \"Empowerly Web Portal\",\n          \"status\": \"operational\",\n          \"page_id\": \"string\",\n          \"created_at\": \"1998-04-15T12:07:16.357Z\",\n          \"updated_at\": \"1959-02-09T01:47:54.995Z\",\n          \"position\": 1675,\n          \"description\": \"string\",\n          \"showcase\": true,\n          \"start_date\": \"1980-09-10\",\n          \"group_id\": \"string\",\n          \"group\": false,\n          \"only_show_if_degraded\": false\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "763faa9d-a614-4525-a24e-736e03f33ccd",
+              "name": "Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scheduled-maintenances",
+                    "active.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://status.empowerly.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "411b6d0e-3503-4398-9af6-500ad31ff8cf",
+    "name": "Empowerly Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Unauthenticated JSON API served from Empowerly's own status subdomain (status.empowerly.com) by Atlassian Statuspage. Empowerly does not publish an API reference for this surface; every path, status code and response shape in this document was DERIVED from live unauthenticated probes of https://status.empowerly.com on 2026-08-12 (see x-evidence). Nothing here is invented — schemas describe the fields actually returned by those probes. Fields Statuspage may return but that were not observed on this page (for example populated incident objects, since Empowerly's incident history was empty at probe time) are documented as nullable/optional and marked accordingly.\n\nContact Support:\n Name: Empowerly",
+      "type": "text/plain"
+    }
+  }
+}
