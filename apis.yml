@@ -20,6 +20,16 @@ created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
+- Education
+- EdTech
+- College Admissions
+- Counseling
+- Students
+- Career Services
+- Consumer Services
+- Status Page
+tags_raw:
+- Company
 - education
 - edtech
 - college-admissions
@@ -41,6 +51,11 @@ apis:
   baseURL: https://status.empowerly.com/api/v2
   x-hosted-by: Atlassian Statuspage
   tags:
+  - Status Page
+  - Incidents
+  - Uptime
+  - Monitoring
+  tags_raw:
   - status-page
   - incidents
   - uptime
