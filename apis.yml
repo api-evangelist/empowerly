@@ -41,12 +41,11 @@ tags_raw:
 apis:
 - name: Empowerly Status API
   description: >-
-    Read-only, unauthenticated JSON status API served from Empowerly's own status subdomain by
-    Atlassian Statuspage. Exposes the overall page status indicator, the component roster (currently
-    a single "Empowerly Web Portal" component), incident history, and scheduled maintenance windows,
-    plus RSS and Atom history feeds. This is a platform-provided surface rather than a first-party
-    Empowerly product API — Empowerly operates the page and its content, Atlassian defines the
-    contract.
+    Read-only, unauthenticated JSON status API served from Empowerly's own status subdomain by Atlassian
+    Statuspage. Exposes the overall page status indicator, the component roster (currently a single "Empowerly
+    Web Portal" component), incident history, and scheduled maintenance windows, plus RSS and Atom history
+    feeds. This is a platform-provided surface rather than a first-party Empowerly product API — Empowerly
+    operates the page and its content, Atlassian defines the contract.
   humanURL: https://status.empowerly.com/
   baseURL: https://status.empowerly.com/api/v2
   x-hosted-by: Atlassian Statuspage
@@ -71,6 +70,36 @@ apis:
     url: https://status.empowerly.com/history.rss
   - type: Atom
     url: https://status.empowerly.com/history.atom
+- aid: empowerly:empowerly-components-api
+  name: Empowerly Components API
+  description: The individual platform components Empowerly reports on.
+  humanURL: https://status.empowerly.com/
+  baseURL: https://status.empowerly.com/api/v2
+  tags:
+  - Components
+  properties:
+  - type: OpenAPI
+    url: openapi/empowerly-components-api-openapi.yml
+- aid: empowerly:empowerly-incidents-api
+  name: Empowerly Incidents API
+  description: Incident history and currently unresolved incidents.
+  humanURL: https://status.empowerly.com/
+  baseURL: https://status.empowerly.com/api/v2
+  tags:
+  - Incidents
+  properties:
+  - type: OpenAPI
+    url: openapi/empowerly-incidents-api-openapi.yml
+- aid: empowerly:empowerly-maintenance-api
+  name: Empowerly Maintenance API
+  description: Scheduled maintenance windows.
+  humanURL: https://status.empowerly.com/
+  baseURL: https://status.empowerly.com/api/v2
+  tags:
+  - Maintenance
+  properties:
+  - type: OpenAPI
+    url: openapi/empowerly-maintenance-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
