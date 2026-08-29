@@ -11,6 +11,18 @@ description: >-
   enrollment conversation rather than published price tiers. Empowerly publishes no public developer
   program, API documentation, or SDKs; the only publicly callable surface on its own domains is the
   Atlassian-hosted status page API at status.empowerly.com.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://empowerly.com/empowerly-icon.png
 url: https://raw.githubusercontent.com/api-evangelist/empowerly/refs/heads/main/apis.yml
 x-type: company
