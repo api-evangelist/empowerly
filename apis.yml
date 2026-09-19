@@ -53,7 +53,7 @@ tags:
 - Students
 - Career Services
 - Consumer Services
-- Status Page
+- Status Pages
 tags_raw:
 - Company
 - education
@@ -76,7 +76,7 @@ apis:
   baseURL: https://status.empowerly.com/api/v2
   x-hosted-by: Atlassian Statuspage
   tags:
-  - Status Page
+  - Status Pages
   - Incidents
   - Uptime
   - Monitoring
