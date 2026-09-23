@@ -3,7 +3,7 @@ info:
   title: Empowerly Status Maintenance API
   version: v2
   summary: Read-only status, component, incident and maintenance data for the Empowerly platform.
-  description: Unauthenticated JSON API served from Empowerly's own status subdomain (status.empowerly.com) by Atlassian Statuspage. Empowerly does not publish an API reference for this surface; every path, status code and response shape in this document was DERIVED from live unauthenticated probes of https://status.empowerly.com on 2026-08-12 (see x-evidence). Nothing here is invented — schemas describe the fields actually returned by those probes. Fields Statuspage may return but that were not observed on this page (for example populated incident objects, since Empowerly's incident history was empty at probe time) are documented as nullable/optional and marked accordingly.
+  description: Unauthenticated JSON API served from Empowerly's own status subdomain (status.empowerly.com) by Atlassian Statuspage.
   contact:
     name: Empowerly
     url: https://empowerly.com/
@@ -101,36 +101,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Page:
-      type: object
-      description: Identity of the status page itself. Present on every response.
-      properties:
-        id:
-          type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
-        name:
-          type: string
-          examples:
-          - Empowerly
-        url:
-          type: string
-          format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
-          type: string
-          examples:
-          - America/Los_Angeles
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - url
-      - updated_at
     Component:
       type: object
       properties:
@@ -186,6 +156,36 @@ components:
       - name
       - status
       - page_id
+    Page:
+      type: object
+      description: Identity of the status page itself. Present on every response.
+      properties:
+        id:
+          type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
+        name:
+          type: string
+          examples:
+          - Empowerly
+        url:
+          type: string
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - url
+      - updated_at
     ScheduledMaintenance:
       type: object
       description: Statuspage scheduled maintenance object. Empowerly published zero maintenance windows at probe time; shape documented as optional.
