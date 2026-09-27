@@ -86,18 +86,88 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    IncidentsResponse:
+    Incident:
       type: object
+      description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
       properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        incidents:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - investigating
+          - identified
+          - monitoring
+          - resolved
+          - postmortem
+        impact:
+          type: string
+          enum:
+          - none
+          - minor
+          - major
+          - critical
+        shortlink:
+          type: string
+          format: uri
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        monitoring_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        resolved_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        page_id:
+          type: string
+        incident_updates:
           type: array
           items:
-            $ref: '#/components/schemas/Incident'
+            type: object
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+    Page:
+      type: object
+      description: Identity of the status page itself. Present on every response.
+      properties:
+        id:
+          type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
+        name:
+          type: string
+          examples:
+          - Empowerly
+        url:
+          type: string
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
+          type: string
+          format: date-time
       required:
-      - page
-      - incidents
+      - id
+      - name
+      - url
+      - updated_at
     Component:
       type: object
       properties:
@@ -153,88 +223,18 @@ components:
       - name
       - status
       - page_id
-    Page:
+    IncidentsResponse:
       type: object
-      description: Identity of the status page itself. Present on every response.
       properties:
-        id:
-          type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
-        name:
-          type: string
-          examples:
-          - Empowerly
-        url:
-          type: string
-          format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
-          type: string
-          examples:
-          - America/Los_Angeles
-        updated_at:
-          type: string
-          format: date-time
+        page:
+          $ref: '#/components/schemas/Page'
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
       required:
-      - id
-      - name
-      - url
-      - updated_at
-    Incident:
-      type: object
-      description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-          enum:
-          - investigating
-          - identified
-          - monitoring
-          - resolved
-          - postmortem
-        impact:
-          type: string
-          enum:
-          - none
-          - minor
-          - major
-          - critical
-        shortlink:
-          type: string
-          format: uri
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        monitoring_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        resolved_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        page_id:
-          type: string
-        incident_updates:
-          type: array
-          items:
-            type: object
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
+      - page
+      - incidents
   responses:
     NotFound:
       description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.

@@ -87,164 +87,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Component:
-      type: object
-      properties:
-        id:
-          type: string
-          examples:
-          - h2qv5hy8rsbp
-        name:
-          type: string
-          examples:
-          - Empowerly Web Portal
-        status:
-          type: string
-          enum:
-          - operational
-          - degraded_performance
-          - partial_outage
-          - major_outage
-          - under_maintenance
-          examples:
-          - operational
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        position:
-          type: integer
-        description:
-          type:
-          - string
-          - 'null'
-        showcase:
-          type: boolean
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: date
-        group_id:
-          type:
-          - string
-          - 'null'
-        page_id:
-          type: string
-        group:
-          type: boolean
-        only_show_if_degraded:
-          type: boolean
-      required:
-      - id
-      - name
-      - status
-      - page_id
-    Page:
-      type: object
-      description: Identity of the status page itself. Present on every response.
-      properties:
-        id:
-          type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
-        name:
-          type: string
-          examples:
-          - Empowerly
-        url:
-          type: string
-          format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
-          type: string
-          examples:
-          - America/Los_Angeles
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - url
-      - updated_at
-    Summary:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
-        incidents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Incident'
-        scheduled_maintenances:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduledMaintenance'
-        status:
-          $ref: '#/components/schemas/StatusIndicator'
-      required:
-      - page
-      - components
-      - incidents
-      - scheduled_maintenances
-      - status
-    ScheduledMaintenance:
-      type: object
-      description: Statuspage scheduled maintenance object. Empowerly published zero maintenance windows at probe time; shape documented as optional.
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-          enum:
-          - scheduled
-          - in_progress
-          - verifying
-          - completed
-        scheduled_for:
-          type: string
-          format: date-time
-        scheduled_until:
-          type: string
-          format: date-time
-        page_id:
-          type: string
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
-    StatusIndicator:
-      type: object
-      properties:
-        indicator:
-          type: string
-          description: Severity roll-up across all components.
-          enum:
-          - none
-          - minor
-          - major
-          - critical
-          - maintenance
-          examples:
-          - none
-        description:
-          type: string
-          examples:
-          - All Systems Operational
-      required:
-      - indicator
-      - description
     Incident:
       type: object
       description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
@@ -307,6 +149,164 @@ components:
       required:
       - page
       - status
+    Page:
+      type: object
+      description: Identity of the status page itself. Present on every response.
+      properties:
+        id:
+          type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
+        name:
+          type: string
+          examples:
+          - Empowerly
+        url:
+          type: string
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - url
+      - updated_at
+    Summary:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+        scheduled_maintenances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledMaintenance'
+        status:
+          $ref: '#/components/schemas/StatusIndicator'
+      required:
+      - page
+      - components
+      - incidents
+      - scheduled_maintenances
+      - status
+    Component:
+      type: object
+      properties:
+        id:
+          type: string
+          examples:
+          - h2qv5hy8rsbp
+        name:
+          type: string
+          examples:
+          - Empowerly Web Portal
+        status:
+          type: string
+          enum:
+          - operational
+          - degraded_performance
+          - partial_outage
+          - major_outage
+          - under_maintenance
+          examples:
+          - operational
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        position:
+          type: integer
+        description:
+          type:
+          - string
+          - 'null'
+        showcase:
+          type: boolean
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        group_id:
+          type:
+          - string
+          - 'null'
+        page_id:
+          type: string
+        group:
+          type: boolean
+        only_show_if_degraded:
+          type: boolean
+      required:
+      - id
+      - name
+      - status
+      - page_id
+    StatusIndicator:
+      type: object
+      properties:
+        indicator:
+          type: string
+          description: Severity roll-up across all components.
+          enum:
+          - none
+          - minor
+          - major
+          - critical
+          - maintenance
+          examples:
+          - none
+        description:
+          type: string
+          examples:
+          - All Systems Operational
+      required:
+      - indicator
+      - description
+    ScheduledMaintenance:
+      type: object
+      description: Statuspage scheduled maintenance object. Empowerly published zero maintenance windows at probe time; shape documented as optional.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - scheduled
+          - in_progress
+          - verifying
+          - completed
+        scheduled_for:
+          type: string
+          format: date-time
+        scheduled_until:
+          type: string
+          format: date-time
+        page_id:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
   responses:
     NotFound:
       description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.

@@ -70,18 +70,36 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ComponentsResponse:
+    Page:
       type: object
+      description: Identity of the status page itself. Present on every response.
       properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
+        id:
+          type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
+        name:
+          type: string
+          examples:
+          - Empowerly
+        url:
+          type: string
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
+          type: string
+          format: date-time
       required:
-      - page
-      - components
+      - id
+      - name
+      - url
+      - updated_at
     Component:
       type: object
       properties:
@@ -137,36 +155,18 @@ components:
       - name
       - status
       - page_id
-    Page:
+    ComponentsResponse:
       type: object
-      description: Identity of the status page itself. Present on every response.
       properties:
-        id:
-          type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
-        name:
-          type: string
-          examples:
-          - Empowerly
-        url:
-          type: string
-          format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
-          type: string
-          examples:
-          - America/Los_Angeles
-        updated_at:
-          type: string
-          format: date-time
+        page:
+          $ref: '#/components/schemas/Page'
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
       required:
-      - id
-      - name
-      - url
-      - updated_at
+      - page
+      - components
   responses:
     NotFound:
       description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
