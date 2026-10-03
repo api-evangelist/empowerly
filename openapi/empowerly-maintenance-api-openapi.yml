@@ -100,19 +100,14 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
+      content:
+        text/html:
+          schema:
+            type: string
   schemas:
-    ScheduledMaintenancesResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        scheduled_maintenances:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduledMaintenance'
-      required:
-      - page
-      - scheduled_maintenances
     Page:
       type: object
       description: Identity of the status page itself. Present on every response.
@@ -225,10 +220,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Component'
-  responses:
-    NotFound:
-      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
-      content:
-        text/html:
-          schema:
-            type: string
+    ScheduledMaintenancesResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        scheduled_maintenances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledMaintenance'
+      required:
+      - page
+      - scheduled_maintenances

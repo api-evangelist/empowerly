@@ -85,59 +85,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
+      content:
+        text/html:
+          schema:
+            type: string
   schemas:
-    Incident:
+    IncidentsResponse:
       type: object
-      description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-          enum:
-          - investigating
-          - identified
-          - monitoring
-          - resolved
-          - postmortem
-        impact:
-          type: string
-          enum:
-          - none
-          - minor
-          - major
-          - critical
-        shortlink:
-          type: string
-          format: uri
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        monitoring_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        resolved_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        page_id:
-          type: string
-        incident_updates:
+        page:
+          $ref: '#/components/schemas/Page'
+        incidents:
           type: array
           items:
-            type: object
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
+            $ref: '#/components/schemas/Incident'
+      required:
+      - page
+      - incidents
     Page:
       type: object
       description: Identity of the status page itself. Present on every response.
@@ -223,22 +190,55 @@ components:
       - name
       - status
       - page_id
-    IncidentsResponse:
+    Incident:
       type: object
+      description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
       properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        incidents:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - investigating
+          - identified
+          - monitoring
+          - resolved
+          - postmortem
+        impact:
+          type: string
+          enum:
+          - none
+          - minor
+          - major
+          - critical
+        shortlink:
+          type: string
+          format: uri
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        monitoring_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        resolved_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        page_id:
+          type: string
+        incident_updates:
           type: array
           items:
-            $ref: '#/components/schemas/Incident'
-      required:
-      - page
-      - incidents
-  responses:
-    NotFound:
-      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
-      content:
-        text/html:
-          schema:
-            type: string
+            type: object
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
