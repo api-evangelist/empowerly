@@ -69,14 +69,49 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
-      content:
-        text/html:
-          schema:
-            type: string
   schemas:
+    ComponentsResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+      required:
+      - page
+      - components
+    Page:
+      type: object
+      description: Identity of the status page itself. Present on every response.
+      properties:
+        id:
+          type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
+        name:
+          type: string
+          examples:
+          - Empowerly
+        url:
+          type: string
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - url
+      - updated_at
     Component:
       type: object
       properties:
@@ -132,45 +167,10 @@ components:
       - name
       - status
       - page_id
-    ComponentsResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
-      required:
-      - page
-      - components
-    Page:
-      type: object
-      description: Identity of the status page itself. Present on every response.
-      properties:
-        id:
-          type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
-        name:
-          type: string
-          examples:
-          - Empowerly
-        url:
-          type: string
-          format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
-          type: string
-          examples:
-          - America/Los_Angeles
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - url
-      - updated_at
+  responses:
+    NotFound:
+      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
+      content:
+        text/html:
+          schema:
+            type: string

@@ -100,44 +100,46 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
-      content:
-        text/html:
-          schema:
-            type: string
   schemas:
-    Page:
+    ScheduledMaintenance:
       type: object
-      description: Identity of the status page itself. Present on every response.
+      description: Statuspage scheduled maintenance object. Empowerly published zero maintenance windows at probe time; shape documented as optional.
       properties:
         id:
           type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
         name:
           type: string
-          examples:
-          - Empowerly
-        url:
+        status:
           type: string
-          format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
-          type: string
-          examples:
-          - America/Los_Angeles
-        updated_at:
+          enum:
+          - scheduled
+          - in_progress
+          - verifying
+          - completed
+        scheduled_for:
           type: string
           format: date-time
+        scheduled_until:
+          type: string
+          format: date-time
+        page_id:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+    ScheduledMaintenancesResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        scheduled_maintenances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledMaintenance'
       required:
-      - id
-      - name
-      - url
-      - updated_at
+      - page
+      - scheduled_maintenances
     Component:
       type: object
       properties:
@@ -193,42 +195,40 @@ components:
       - name
       - status
       - page_id
-    ScheduledMaintenance:
+    Page:
       type: object
-      description: Statuspage scheduled maintenance object. Empowerly published zero maintenance windows at probe time; shape documented as optional.
+      description: Identity of the status page itself. Present on every response.
       properties:
         id:
           type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
         name:
           type: string
-        status:
+          examples:
+          - Empowerly
+        url:
           type: string
-          enum:
-          - scheduled
-          - in_progress
-          - verifying
-          - completed
-        scheduled_for:
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
           type: string
           format: date-time
-        scheduled_until:
-          type: string
-          format: date-time
-        page_id:
-          type: string
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
-    ScheduledMaintenancesResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        scheduled_maintenances:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduledMaintenance'
       required:
-      - page
-      - scheduled_maintenances
+      - id
+      - name
+      - url
+      - updated_at
+  responses:
+    NotFound:
+      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
+      content:
+        text/html:
+          schema:
+            type: string

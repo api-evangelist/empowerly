@@ -93,48 +93,58 @@ components:
           schema:
             type: string
   schemas:
-    IncidentsResponse:
+    Incident:
       type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        incidents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Incident'
-      required:
-      - page
-      - incidents
-    Page:
-      type: object
-      description: Identity of the status page itself. Present on every response.
+      description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
       properties:
         id:
           type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
         name:
           type: string
-          examples:
-          - Empowerly
-        url:
+        status:
+          type: string
+          enum:
+          - investigating
+          - identified
+          - monitoring
+          - resolved
+          - postmortem
+        impact:
+          type: string
+          enum:
+          - none
+          - minor
+          - major
+          - critical
+        shortlink:
           type: string
           format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
+        created_at:
           type: string
-          examples:
-          - America/Los_Angeles
+          format: date-time
         updated_at:
           type: string
           format: date-time
-      required:
-      - id
-      - name
-      - url
-      - updated_at
+        monitoring_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        resolved_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        page_id:
+          type: string
+        incident_updates:
+          type: array
+          items:
+            type: object
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
     Component:
       type: object
       properties:
@@ -190,55 +200,45 @@ components:
       - name
       - status
       - page_id
-    Incident:
+    IncidentsResponse:
       type: object
-      description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+      required:
+      - page
+      - incidents
+    Page:
+      type: object
+      description: Identity of the status page itself. Present on every response.
       properties:
         id:
           type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
         name:
           type: string
-        status:
-          type: string
-          enum:
-          - investigating
-          - identified
-          - monitoring
-          - resolved
-          - postmortem
-        impact:
-          type: string
-          enum:
-          - none
-          - minor
-          - major
-          - critical
-        shortlink:
+          examples:
+          - Empowerly
+        url:
           type: string
           format: uri
-        created_at:
+          examples:
+          - https://status.empowerly.com
+        time_zone:
           type: string
-          format: date-time
+          examples:
+          - America/Los_Angeles
         updated_at:
           type: string
           format: date-time
-        monitoring_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        resolved_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        page_id:
-          type: string
-        incident_updates:
-          type: array
-          items:
-            type: object
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
+      required:
+      - id
+      - name
+      - url
+      - updated_at

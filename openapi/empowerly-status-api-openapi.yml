@@ -86,100 +86,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
-      content:
-        text/html:
-          schema:
-            type: string
   schemas:
-    StatusResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        status:
-          $ref: '#/components/schemas/StatusIndicator'
-      required:
-      - page
-      - status
-    Page:
-      type: object
-      description: Identity of the status page itself. Present on every response.
-      properties:
-        id:
-          type: string
-          description: Statuspage page identifier.
-          examples:
-          - thhkhnjsm4jy
-        name:
-          type: string
-          examples:
-          - Empowerly
-        url:
-          type: string
-          format: uri
-          examples:
-          - https://status.empowerly.com
-        time_zone:
-          type: string
-          examples:
-          - America/Los_Angeles
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - url
-      - updated_at
-    Summary:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/Component'
-        incidents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Incident'
-        scheduled_maintenances:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScheduledMaintenance'
-        status:
-          $ref: '#/components/schemas/StatusIndicator'
-      required:
-      - page
-      - components
-      - incidents
-      - scheduled_maintenances
-      - status
-    StatusIndicator:
-      type: object
-      properties:
-        indicator:
-          type: string
-          description: Severity roll-up across all components.
-          enum:
-          - none
-          - minor
-          - major
-          - critical
-          - maintenance
-          examples:
-          - none
-        description:
-          type: string
-          examples:
-          - All Systems Operational
-      required:
-      - indicator
-      - description
     Component:
       type: object
       properties:
@@ -235,6 +142,16 @@ components:
       - name
       - status
       - page_id
+    StatusResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        status:
+          $ref: '#/components/schemas/StatusIndicator'
+      required:
+      - page
+      - status
     ScheduledMaintenance:
       type: object
       description: Statuspage scheduled maintenance object. Empowerly published zero maintenance windows at probe time; shape documented as optional.
@@ -262,6 +179,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Component'
+    Summary:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/Component'
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+        scheduled_maintenances:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScheduledMaintenance'
+        status:
+          $ref: '#/components/schemas/StatusIndicator'
+      required:
+      - page
+      - components
+      - incidents
+      - scheduled_maintenances
+      - status
     Incident:
       type: object
       description: Statuspage incident object. Empowerly published zero incidents at probe time, so no field here was directly observed on this page; the shape is documented as optional.
@@ -314,3 +256,61 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Component'
+    StatusIndicator:
+      type: object
+      properties:
+        indicator:
+          type: string
+          description: Severity roll-up across all components.
+          enum:
+          - none
+          - minor
+          - major
+          - critical
+          - maintenance
+          examples:
+          - none
+        description:
+          type: string
+          examples:
+          - All Systems Operational
+      required:
+      - indicator
+      - description
+    Page:
+      type: object
+      description: Identity of the status page itself. Present on every response.
+      properties:
+        id:
+          type: string
+          description: Statuspage page identifier.
+          examples:
+          - thhkhnjsm4jy
+        name:
+          type: string
+          examples:
+          - Empowerly
+        url:
+          type: string
+          format: uri
+          examples:
+          - https://status.empowerly.com
+        time_zone:
+          type: string
+          examples:
+          - America/Los_Angeles
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - url
+      - updated_at
+  responses:
+    NotFound:
+      description: Unknown path under /api/v2. Observed as an HTML error document, not a JSON problem object — this API does not implement RFC 9457.
+      content:
+        text/html:
+          schema:
+            type: string
